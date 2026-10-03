@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GlanceMD.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "GlanceMD.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

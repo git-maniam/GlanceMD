@@ -1,0 +1,14 @@
+.dotnet-home/
+.packages/
+.vs/
+.vscode/
+**/bin/
+**/obj/
+TestResults/
+*.user
+*.suo
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+AppPackages/

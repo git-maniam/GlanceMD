@@ -1,0 +1,5 @@
+GlanceMD bundles Mermaid, Copyright (c) 2014-present Knut Sveidqvist and contributors.
+Mermaid is licensed under the MIT License: https://github.com/mermaid-js/mermaid/blob/develop/LICENSE
+
+GlanceMD uses Markdig, Copyright (c) 2018-2025 Alexandre Mutel.
+Markdig is licensed under the BSD 2-Clause License: https://github.com/xoofx/markdig/blob/master/license.txt

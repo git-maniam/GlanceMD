@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      NUGET_PACKAGES: ${{ github.workspace }}\.packages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+          cache: true
+          cache-dependency-path: '**/*.csproj'
+      - name: Restore
+        run: dotnet restore GlanceMD.slnx -r win-x64
+      - name: Test core
+        run: dotnet test tests/GlanceMD.Core.Tests/GlanceMD.Core.Tests.csproj -c Release --no-restore
+      - name: Build app
+        run: dotnet build src/GlanceMD.App/GlanceMD.App.csproj -c Release --no-restore -p:Platform=x64
