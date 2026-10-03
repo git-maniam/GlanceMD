@@ -18,7 +18,6 @@ Implemented controls:
 
 Known limitations for the current implementation:
 
-- Diagram copying places SVG clipboard data. A future release should additionally rasterize to PNG for applications that do not accept SVG.
 - The JavaScript sanitizer is deliberately narrow but is not a substitute for staying current with Mermaid security releases.
 - Junction/reparse-point resolution is constrained lexically. Deployments processing hostile local files should add final-handle path validation before relaxing any directory policy.
 - Single-instance redirection is not yet implemented; each Windows activation may create its own viewer window.

@@ -12,3 +12,4 @@ TestResults/
 *.msix
 *.msixbundle
 AppPackages/
+artifacts/

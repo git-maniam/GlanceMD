@@ -30,6 +30,16 @@ Run the packaged application:
 dotnet run --project src/GlanceMD.App/GlanceMD.App.csproj -p:Platform=x64
 ```
 
+Local packaged launch through `dotnet run` requires Windows Developer Mode. Building and testing do not require it.
+
+Create a self-contained x64 distribution that runs without Developer Mode or a separate .NET installation:
+
+```powershell
+.\scripts\Publish.ps1 -Architecture x64
+```
+
+The script creates `artifacts/GlanceMD-win-x64/GlanceMD.exe`, a ZIP distribution, and a SHA-256 checksum file. Build artifacts are intentionally excluded from Git; attach the ZIP and checksum to a GitHub release for distribution.
+
 ## Security model
 
 Opened documents are untrusted and are never modified. Raw HTML is disabled, remote content is blocked by Content Security Policy, WebView navigation and permissions are intercepted, local images pass through a same-folder path/extension/size policy, and Mermaid output is sanitized before insertion. See [docs/security.md](docs/security.md) for details and known limitations.

@@ -462,8 +462,8 @@ public sealed partial class MainPage : Page
                 case "copy-text":
                     CopyText(root.GetProperty("text").GetString() ?? string.Empty);
                     break;
-                case "copy-svg":
-                    await CopySvgAsBitmapAsync(root.GetProperty("svg").GetString() ?? string.Empty);
+                case "copy-png":
+                    CopyPng(root.GetProperty("data").GetString() ?? string.Empty);
                     break;
                 case "link":
                     await HandleLinkAsync(root.GetProperty("href").GetString() ?? string.Empty);
@@ -483,18 +483,18 @@ public sealed partial class MainPage : Page
         Clipboard.SetContent(package);
     }
 
-    private static async Task CopySvgAsBitmapAsync(string svg)
+    private static void CopyPng(string base64)
     {
+        var bytes = Convert.FromBase64String(base64);
         var package = new DataPackage { RequestedOperation = DataPackageOperation.Copy };
         var stream = new InMemoryRandomAccessStream();
-        await using (var output = stream.AsStreamForWrite())
-        await using (var writer = new StreamWriter(output, leaveOpen: true))
+        using (var output = stream.AsStreamForWrite())
         {
-            await writer.WriteAsync(svg);
-            await writer.FlushAsync();
+            output.Write(bytes);
+            output.Flush();
         }
         stream.Seek(0);
-        package.SetData("image/svg+xml", RandomAccessStreamReference.CreateFromStream(stream));
+        package.SetBitmap(RandomAccessStreamReference.CreateFromStream(stream));
         Clipboard.SetContent(package);
     }
 
