@@ -40,6 +40,16 @@ Create a self-contained x64 distribution that runs without Developer Mode or a s
 
 The script creates `artifacts/GlanceMD-win-x64/GlanceMD.exe`, a ZIP distribution, and a SHA-256 checksum file. Build artifacts are intentionally excluded from Git; attach the ZIP and checksum to a GitHub release for distribution.
 
+## Build the Windows installer
+
+Install [Inno Setup 6](https://jrsoftware.org/isinfo.php), then run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\BuildInstaller.ps1 -Version 1.0.0
+```
+
+The output is `artifacts/installer/GlanceMD-Setup-x64.exe` with a matching SHA-256 checksum. The installer is self-contained, installs per user without requiring Administrator access, adds an uninstaller and Start Menu shortcut, and optionally creates a desktop shortcut and Markdown file associations. See [docs/installer.md](docs/installer.md) for signing and release guidance.
+
 ## Security model
 
 Opened documents are untrusted and are never modified. Raw HTML is disabled, remote content is blocked by Content Security Policy, WebView navigation and permissions are intercepted, local images pass through a same-folder path/extension/size policy, and Mermaid output is sanitized before insertion. See [docs/security.md](docs/security.md) for details and known limitations.
